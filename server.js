@@ -22,7 +22,10 @@ app.use(cors())
 //     res.header('Access-Control-Allow-Headers', 'Content-Type');
 //     next();
 // })
-
+app.get('/api',function(req,res){
+  res.send("working");
+})
+  
 app.post('/api/signup', function(req,res){
     var data={
         user_name:req.body.user_name,

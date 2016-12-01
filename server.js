@@ -12,6 +12,7 @@ var connection = mysql.createConnection({
   database : 'settle',
 });
 
+var port = process.env.PORT || 8080;
 
 var app=express();
 app.use(bodyParser.json())
@@ -178,4 +179,6 @@ app.post('/api/approve',function(req,res){
     //     }
     // );
     
-app.listen(8081)
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});

@@ -34,7 +34,7 @@ app.post('/api/signup', function(req,res){
         email:req.body.email,
         password:sha1(req.body.password),
         verified:0,
-        otp:Number(new Date()).toString().substring(1,5)
+        otp:Number(new Date()).toString().substring(9,14)
     }
     console.log(data)
     connection.query('SELECT * FROM user WHERE number = ? AND verified=0',[req.body.number],function(err,result){
@@ -114,7 +114,6 @@ app.get('/api/givemoney/:number',function(req,res){
 })
 
 app.post('/api/requestmoney',function(req,res){
-    var otp=Number(new Date()).toString().substring(1,5);
     var data={
         payee_name:req.body.payee_name,
         requester_mobile:req.body.requester_mobile,
@@ -122,7 +121,7 @@ app.post('/api/requestmoney',function(req,res){
         amount:req.body.amount,
         pending:1,
         datetime:new Date(),
-        otp:otp
+        otp:Number(new Date()).toString().substring(9,14)
     }
     connection.query('INSERT INTO take_money SET ?',[data],function(err,result){
         if(err) return console.log(err)
